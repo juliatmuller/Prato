@@ -1,18 +1,18 @@
-CREATE DATABASE restaurante;
-USE restaurante;
+CREATE DATABASE Restaurante_Kaju;
+USE Pratos_Kaju;
 
-CREATE TABLE usuarios (
+CREATE TABLE usuario (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NULL
+    nome VARCHAR(200) NOT NULL,
+    email VARCHAR(200) NOT NULL
 );
 
-CREATE TABLE pratos (
+CREATE TABLE prato (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
-    descricao TEXT NOT NULL,
-    preco DECIMAL(10,2) NOT NULL,
-    categoria VARCHAR(50) NOT NULL,
-    usuario_id INT NOT NULL,
-    FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
-); 
+    id_usuario INT,
+    nome VARCHAR(200) NOT NULL,
+    descricao VARCHAR(200) NOT NULL,
+    preco DECIMAL(10, 2) NOT NULL,
+    categoria VARCHAR(200) NOT NULL,
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id)
+);
