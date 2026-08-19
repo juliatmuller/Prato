@@ -1,0 +1,183 @@
+
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #EEE4DA;
+    color: #4D0E13;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+
+
+header {
+    background-color: #4D0E13;
+    color: #EEE4DA;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(77, 14, 19, 0.25);
+}
+
+header h1 {
+    margin: 0;
+    font-family: Georgia, serif;
+    font-size: 34px;
+    letter-spacing: 1px;
+}
+
+
+
+main {
+    width: 90%;
+    max-width: 1100px;
+    margin: 35px auto;
+}
+
+
+
+
+h2 {
+    font-family: Georgia, serif;
+    color: #4D0E13;
+    margin-top: 35px;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #C8A49F;
+}
+
+
+
+
+form {
+    background-color: #D8C4AC;
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 12px rgba(77, 14, 19, 0.15);
+}
+
+label {
+    display: inline-block;
+    width: 170px;
+    margin: 7px 0;
+    font-weight: bold;
+    color: #4D0E13;
+}
+
+input,
+select {
+    width: 200px;
+    height: 36px;
+    padding: 9px 12px;
+    border: 1px solid #C8A49F;
+    border-radius: 8px;
+    background-color: #EEE4DA;
+    color: #4D0E13;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border: 2px solid #4D0E13;
+}
+
+
+
+
+button {
+    background-color: #4D0E13;
+    color: #EEE4DA;
+    border: none;
+    padding: 11px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.2s;
+}
+
+button:hover {
+    background-color: #C8A49F;
+    color: #4D0E13;
+}
+
+
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #EEE4DA;
+    box-shadow: 0 4px 12px rgba(77, 14, 19, 0.15);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+
+
+
+th {
+    background-color: #4D0E13;
+    color: #EEE4DA;
+    padding: 13px 10px;
+    text-align: center;
+}
+
+
+
+
+td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #C8A49F;
+    text-align: center;
+}
+
+
+
+tr:nth-child(even) {
+    background-color: #D8C4AC;
+}
+
+tr:hover {
+    background-color: #C8A49F;
+}
+
+
+
+
+td a {
+    color: #4D0E13;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 5px;
+}
+
+td a:hover {
+    text-decoration: underline;
+}
+
+
+
+div form {
+    background-color: transparent;
+    box-shadow: none;
+    padding: 10px 0;
+}
+
+
+
+
+footer {
+    margin-top: 50px;
+    height: 70px;
+    background-color: #4D0E13;
+}
+
