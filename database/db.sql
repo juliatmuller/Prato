@@ -1,5 +1,5 @@
-CREATE DATABASE Restaurante_Kaju;
-USE Pratos_Kaju;
+CREATE DATABASE restauranteP_Kaju;
+USE restauranteP_Kaju;
 
 CREATE TABLE usuario (
     id INT AUTO_INCREMENT PRIMARY KEY,
