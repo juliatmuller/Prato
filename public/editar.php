@@ -26,7 +26,7 @@ $usuarios = $conexao->query("SELECT * FROM usuario");
 </head>
 <body>
     <h2>Editar Prato</h2>
-    <form action="prato_atualizar.php" method="POST">
+    <form action="atualizar.php" method="POST">
         <input type="hidden" name="id" value="<?php echo $prato['id']; ?>">
 
         <label>Nome:</label>
@@ -38,8 +38,39 @@ $usuarios = $conexao->query("SELECT * FROM usuario");
         <label>Preço:</label>
         <input type="number" name="preco" step="0.01" value="<?php echo $prato['preco']; ?>" required><br>
 
-        <label>Categoria:</label>
-        <input type="text" name="categoria" value="<?php echo $prato['categoria']; ?>" required><br>
+       <label>Categoria:</label>
+
+<select name="categoria" required>
+
+    <option value="">Selecione uma categoria</option>
+
+    <option value="entrada" <?php echo ($prato['categoria'] == 'entrada') ? 'selected' : ''; ?>>
+        Entrada
+    </option>
+
+    <option value="aperitivo" <?php echo ($prato['categoria'] == 'aperitivo') ? 'selected' : ''; ?>>
+        Aperitivo
+    </option>
+
+    <option value="prato principal" <?php echo ($prato['categoria'] == 'prato principal') ? 'selected' : ''; ?>>
+        Prato principal
+    </option>
+
+    <option value="sobremesa" <?php echo ($prato['categoria'] == 'sobremesa') ? 'selected' : ''; ?>>
+        Sobremesa
+    </option>
+
+    <option value="bebida" <?php echo ($prato['categoria'] == 'bebida') ? 'selected' : ''; ?>>
+        Bebida
+    </option>
+
+    <option value="bebida alcoolizada" <?php echo ($prato['categoria'] == 'bebida alcoolizada') ? 'selected' : ''; ?>>
+        Bebida alcoolizada
+    </option>
+
+</select>
+
+<br>
 
         <label>Usuário responsável:</label>
         <select name="id_usuario" required>
