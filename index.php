@@ -31,14 +31,14 @@ $usuarios_filtro = mysqli_query($conexao, "SELECT id, nome FROM usuario ORDER BY
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUD - Restaurante</title>
+    <title>Restaurante Kaju</title>
    <link rel="stylesheet" href="style/style.css?v=2">
 </head>
 
 <body>
 
     <header>
-        <h1>CRUD - Restaurante</h1>
+        <h1> Restaurante Kaju</h1>
       
     </header>
 
