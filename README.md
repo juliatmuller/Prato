@@ -1,15 +1,17 @@
-RF1 — Cadastrar usuário: O sistema deve permitir cadastrar usuários informando nome e e-mail.
+# Sistema de Cadastro de Pratos
 
-RF2 — Cadastrar Prato: O sistema deve permitir que um usuário cadastre um prato informando nome, descrição, preço e categoria.
+Neste projeto desenvolvemos um sistema simples para um restaurante, com o objetivo de organizar o cadastro de usuários e pratos.
 
-RF3 — Listar Pratos: O sistema deve apresentar todos os pratos cadastrados, informando também o usuário responsável pelo cadastro.
+Utilizamos PHP, MySQL, HTML e CSS**, executando o projeto localmente pelo XAMPP. Criamos um banco de dados com duas tabelas relacionadas: uma para os usuários e outra para os pratos.
 
-RF4 — Editar Prato: O sistema deve permitir alterar as informações de um prato já cadastrado.
+Primeiramente, desenvolvemos o cadastro de usuários, onde é possível informar o nome e o e-mail. Depois, criamos o cadastro de pratos, permitindo informar o nome, descrição, preço e categoria.
 
-RF5 — Excluir Prato: O sistema deve permitir excluir um prato já cadastrado.
+Também fizemos a listagem dos pratos cadastrados, mostrando o usuário responsável por cada prato. Dessa forma, conseguimos relacionar os registros da tabela de pratos com os usuários cadastrados no sistema.
 
-RF6 — Listar Pratos por Usuário: O sistema deve permitir visualizar os pratos cadastrados por um determinado usuário.
+Além do cadastro e da visualização, adicionamos as funções de **editar e excluir pratos** e também a possibilidade de visualizar os pratos cadastrados por um determinado usuário.
 
-RNF1 — Validação dos Campos: O sistema não deve permitir o cadastro de usuários ou pratos com campos obrigatórios vazios.
+Durante o desenvolvimento, utilizamos **Prepared Statements** nas operações que recebem dados dos formulários, buscando deixar o sistema mais seguro contra SQL Injection. Também adicionamos validações para evitar o cadastro com campos obrigatórios vazios.
 
-RNF2 — Segurança dos Dados: As operações que recebem informações fornecidas pelo usuário deverão utilizar Prepared Statements.
+O projeto foi desenvolvido em dupla e versionado utilizando **Git e GitHub**, com commits realizados durante o desenvolvimento para registrar a evolução do sistema.
+
+Com isso, conseguimos criar um sistema funcional que demonstra a comunicação entre **formulário, PHP e banco de dados**, além do relacionamento entre usuários e pratos.
