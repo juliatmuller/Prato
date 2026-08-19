@@ -21,8 +21,8 @@ if ($filtro_usuario) {
     $pratos = mysqli_query($conexao, $sql);
 }
 
-$usuarios = mysqli_query($conexao, "SELECT * FROM usuario");
-
+$usuarios_prato = mysqli_query($conexao, "SELECT id, nome FROM usuario ORDER BY nome");
+$usuarios_filtro = mysqli_query($conexao, "SELECT id, nome FROM usuario ORDER BY nome");
 ?>
 
 <!DOCTYPE html>
@@ -32,24 +32,21 @@ $usuarios = mysqli_query($conexao, "SELECT * FROM usuario");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRUD - Restaurante</title>
-    <link rel="stylesheet" href="style/style.css">
+   <link rel="stylesheet" href="style/style.css?v=2">
 </head>
 
 <body>
 
     <header>
         <h1>CRUD - Restaurante</h1>
-        <nav>
-            <a href="public/usuarios.php">Gerenciar Usuários</a> | 
-            <a href="public/pratos.php">Ver Todos os Pratos</a>
-        </nav>
+      
     </header>
 
     <main>
 
         <h2>Cadastrar Usuário</h2>
 
-        <form action="public/usuario_cadastrar.php" method="POST">
+        <form action="public/cadastrar_usuario.php" method="POST">
 
             <label for="nome_usuario">Nome:</label>
             <input type="text" id="nome_usuario" name="nome" required>
@@ -67,7 +64,7 @@ $usuarios = mysqli_query($conexao, "SELECT * FROM usuario");
 
         <h2>Adicionar um novo prato!</h2>
 
-        <form action="public/prato_cadastrar.php" method="POST">
+        <form action="public/cadastrar_prato.php" method="POST">
 
             <label for="nome_prato">Nome do prato:</label>
             <input type="text" id="nome_prato" name="nome" required>
@@ -84,27 +81,31 @@ $usuarios = mysqli_query($conexao, "SELECT * FROM usuario");
 
             <br>
 
-            <label for="categoria">Categoria:</label>
-            <input type="text" id="categoria" name="categoria" required>
+          <label for="categoria">Categoria:</label>
 
+<select id="categoria" name="categoria" required>
+    <option value="">Selecione uma categoria</option>
+    <option value="entrada">Entrada</option>
+    <option value="aperitivo">Aperitivo</option>
+    <option value="prato principal">Prato principal</option>
+    <option value="sobremesa">Sobremesa</option>
+    <option value="bebida">Bebida</option>
+    <option value="bebida alcoolizada">Bebida alcoolizada</option>
+</select>
             <br>
 
-            <label for="id_usuario">Usuário responsável:</label>
+          <label for="id_usuario">Usuário responsável:</label>
 
-            <select id="id_usuario" name="id_usuario" required>
+<select id="id_usuario" name="id_usuario" required>
+    <option value="">Selecione um usuário</option>
 
-                <option value="">Selecione um usuário</option>
+    <?php while ($usuario = mysqli_fetch_assoc($usuarios_prato)) { ?>
+        <option value="<?php echo $usuario['id']; ?>">
+            <?php echo htmlspecialchars($usuario['nome']); ?>
+        </option>
+    <?php } ?>
 
-                <?php 
-                mysqli_data_seek($usuarios, 0);
-                while ($usuario = mysqli_fetch_assoc($usuarios)) { 
-                ?>
-                    <option value="<?php echo $usuario["id"]; ?>">
-                        <?php echo $usuario["nome"]; ?>
-                    </option>
-                <?php } ?>
-
-            </select>
+</select>
 
             <br>
 
@@ -114,64 +115,83 @@ $usuarios = mysqli_query($conexao, "SELECT * FROM usuario");
 
         <div>
 
-            <h2>
-                Pratos Cadastrados
-                <?php if ($filtro_usuario): ?>
-                    (Filtrado por usuário) - <a href="index.php">Limpar filtro</a>
-                <?php endif; ?>
-            </h2>
+<h2>Pratos Cadastrados</h2>
 
-            <!-- Filtro por Usuário (RF6) -->
-            <form action="index.php" method="GET">
-                <label for="usuario_id">Filtrar por Usuário:</label>
-                <select name="usuario_id" id="usuario_id" onchange="this.form.submit()">
-                    <option value="">Todos os usuários</option>
-                    <?php 
-                    mysqli_data_seek($usuarios, 0);
-                    while ($u = mysqli_fetch_assoc($usuarios)) { 
-                    ?>
-                        <option value="<?php echo $u['id']; ?>" <?php echo ($filtro_usuario == $u['id']) ? 'selected' : ''; ?>>
-                            <?php echo $u['nome']; ?>
-                        </option>
-                    <?php } ?>
-                </select>
-            </form>
+<form action="index.php" method="GET">
+    <label for="filtro_usuario">Filtrar por Usuário:</label>
 
-            <br>
+    <select name="usuario_id" id="filtro_usuario" onchange="this.form.submit()">
+        <option value="">Todos os usuários</option>
 
-            <table>
+        <?php while ($u = mysqli_fetch_assoc($usuarios_filtro)) { ?>
 
-                <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Descrição</th>
-                    <th>Preço</th>
-                    <th>Categoria</th>
-                    <th>Cadastrado por</th>
-                    <th>Ações</th>
-                </tr>
+            <option value="<?php echo $u['id']; ?>"
+                <?php echo ($filtro_usuario == $u['id']) ? 'selected' : ''; ?>>
+                <?php echo $u['nome']; ?>
+            </option>
 
-                <?php while ($prato = mysqli_fetch_assoc($pratos)) { ?>
+        <?php } ?>
 
-                    <tr>
+    </select>
+</form>
 
-                        <td><?php echo $prato["id"]; ?></td>
-                        <td><?php echo $prato["nome"]; ?></td>
-                        <td><?php echo $prato["descricao"]; ?></td>
-                        <td>R$ <?php echo number_format($prato["preco"], 2, ',', '.'); ?></td>
-                        <td><?php echo $prato["categoria"]; ?></td>
-                        <td><?php echo $prato["usuario_nome"]; ?></td>
+<br>
 
-                        <td>
-                            <a href="public/prato_editar.php?id=<?php echo $prato["id"]; ?>">Editar</a>
-                            <a href="public/prato_excluir.php?id=<?php echo $prato["id"]; ?>" onclick="return confirm('Deseja excluir mesmo?')">Excluir</a>
-                        </td>
+<table border="1">
 
-                    </tr>
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Descrição</th>
+        <th>Preço</th>
+        <th>Categoria</th>
+        <th>Cadastrado por</th>
+        <th>Ação</th>
+    </tr>
 
-                <?php } ?>
+    <?php while ($prato = mysqli_fetch_assoc($pratos)) { ?>
 
-            </table>
+        <tr>
+
+            <td><?php echo $prato["id"]; ?></td>
+
+            <td><?php echo $prato["nome"]; ?></td>
+
+            <td><?php echo $prato["descricao"]; ?></td>
+
+            <td>
+                R$ <?php echo number_format($prato["preco"], 2, ',', '.'); ?>
+            </td>
+
+            <td><?php echo $prato["categoria"]; ?></td>
+
+            <td><?php echo $prato["usuario_nome"]; ?></td>
+
+            <td>
+                <a href="public/editar.php?id=<?php echo $prato["id"]; ?>">
+                    Editar
+                </a>
+
+                <a href="public/excluir.php?id=<?php echo $prato["id"]; ?>"
+                   onclick="return confirm('Deseja excluir mesmo?')">
+                    Excluir
+                </a>
+            </td>
+
+        </tr>
+
+    <?php } ?>
+<?php if ($filtro_usuario && mysqli_num_rows($pratos) == 0) { ?>
+
+    <tr>
+        <td colspan="7">
+            Este usuário ainda não possui pratos cadastrados.
+        </td>
+    </tr>
+
+<?php } ?>
+</table>
+                
 
         </div>
 
